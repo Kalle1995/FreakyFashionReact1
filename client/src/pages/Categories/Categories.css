@@ -1,0 +1,45 @@
+.categories-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.categories-page h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.category-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.category-item {
+  flex: 1 1 calc(33.333% - 20px);
+  max-width: 300px;
+  text-align: center;
+}
+
+.category-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.category-item a {
+  text-decoration: none; 
+  color: inherit;       
+  direction: unset;     
+}
+
+.category-item a h3,
+.category-item a p {
+  direction: unset;
+  unicode-bidi: normal;  
+  text-decoration: none; 
+}

@@ -1,0 +1,129 @@
+header {
+  padding: 20px;
+}
+
+.wholeHead {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 300px;
+  max-width: 100%; 
+  height: auto;
+}
+
+.searchAndIcons {
+  display: flex;
+  align-items: center;
+  flex: 1; 
+  margin-left: 20px;
+  gap: 10px;
+}
+
+.search {
+  height: 30px;
+  flex: 1; 
+  min-width: 0; 
+  border: 2px solid gray;
+  border-radius: 12px;
+  padding: 5px;
+  background-image: url(bilder/search.png);
+  background-repeat: no-repeat;
+  background-position: 4px;
+  padding-left: 25px;
+}
+
+.headIcons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0; 
+}
+
+.headIcons img {
+  height: 30px;
+}
+
+.NavList {
+  margin-top: 10px;
+}
+
+.NavList ul {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-list-item a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+
+@media (max-width: 640px) {
+  .wholeHead {
+    flex-direction: column; 
+    align-items: stretch; 
+  }
+
+  .icon {
+    width: 100%; 
+  }
+
+  .searchAndIcons {
+    flex-direction: row; 
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px 0 0 0;
+    gap: 10px;
+  }
+
+  .search {
+    flex: 1; 
+    min-width: 0; 
+    height: 35px;
+  }
+
+  .headIcons img {
+    height: 35px;
+  }
+
+  .NavList ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (min-width: 641px) {
+  .wholeHead {
+    flex-direction: row;
+  }
+
+  .icon {
+    width: 300px;
+  }
+
+  .searchAndIcons {
+    flex: 1; 
+  }
+
+  .search {
+    height: 40px;
+    width: 100%;
+  }
+
+  .headIcons {
+    margin-left: auto; 
+  }
+
+  .headIcons img {
+    height: 35px;
+  }
+
+  .NavList ul {
+    flex-direction: row;
+    gap: 20px;
+  }
+}
