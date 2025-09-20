@@ -10,19 +10,19 @@ function Search() {
   const [error, setError] = useState(null);
 
   const location = useLocation();
-  const query = new URLSearchParams(location.search).get("q")?.trim() || "";
+  const query = new URLSearchParams(location.search).get("q")?.trim() || ""; // Hämtar sökfrågan från URL:en
 
   useEffect(() => {
     if (!query) {
       setProducts([]);
-      setError(null);
+      setError(null); // Rensa felmeddelande om sökfrågan är tom
       setLoading(false);
       return;
     }
 
     const fetchProducts = async () => {
       setLoading(true);
-      setError(null);
+      setError(null); // Rensa tidigare felmeddelande
       try {
         const res = await fetch(
           `http://localhost:8000/api/products/search?q=${encodeURIComponent(
@@ -41,12 +41,12 @@ function Search() {
         setError("Kunde inte hämta sökresultat.");
         setProducts([]);
       } finally {
-        setLoading(false);
-      }
+      setLoading(false); // Sätt loading till false när fetch är klar, oavsett resultat
+        }
     };
 
     fetchProducts();
-  }, [query]);
+  }, [query]); // Körs när komponenten mountas eller när 'query' ändras
 
   return (
     <>
@@ -54,9 +54,9 @@ function Search() {
       <main className="search-page">
         {loading && <p>Laddar...</p>}
 
-        {error && <p className="error">{error}</p>}
+        {error && <p className="error">{error}</p>} {/* Visa felmeddelande om det finns ett fel */}
 
-        {!loading && !error && products.length > 0 && (
+        {!loading && !error && products.length > 0 && ( // Om inte laddar, inget fel och produkter finns
           <>
             <p>Hittade {products.length} Produkter</p>
             <div className="search-results">

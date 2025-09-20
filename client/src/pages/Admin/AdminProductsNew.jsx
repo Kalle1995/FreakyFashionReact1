@@ -33,11 +33,18 @@ function AdminProductsNew() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // med preventDefault(). man stoppar sidomladdningen och kan själv bestämma vad som ska hända (t.ex. spara till API). 
     if (!name || name.length > 25) {
-      alert("Namn är obligatoriskt och får max vara 25 tecken.");
+      alert("Namn är obligatoriskt och får max vara 25 tecken.");   
       return;
     }
+
+    const skuPattern = /^[A-Za-z]{3}\d{3}$/; // Tre bokstäver följt av tre siffror
+  if (!skuPattern.test(sku)) {
+    alert("SKU måste vara tre bokstäver sedan tre siffror (ex: AAA111).");
+    return;
+  }
+
 
     const formData = new FormData();
     formData.append("name", name);
@@ -148,13 +155,13 @@ function AdminProductsNew() {
               </div>
               {dropdownOpen && (
                 <div className="dropdown-list">
-                  {categories.map((cat) => (
+                  {categories.map((cat) => ( // Gör en checkbox för varje kategori i listan
                     <div key={cat.id} className="dropdown-item">
                       <input
                         type="checkbox"
                         id={`cat-${cat.id}`}
-                        checked={selectedCategories.includes(cat.id)}
-                        onChange={() => handleCheckboxChange(cat.id)}
+                        checked={selectedCategories.includes(cat.id)}  // Om kategorins id finns i selectedCategories är checkboxen ikryssad
+                        onChange={() => handleCheckboxChange(cat.id)}  // När checkboxen ändras, anropa handleCheckboxChange med kategori-id:t
                         className="dropdown-checkbox"
                       />
                       <label htmlFor={`cat-${cat.id}`} className="dropdown-label">{cat.name}</label>

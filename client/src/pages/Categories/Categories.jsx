@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
+import { Link } from "react-router-dom";
 import "./Categories.css";
 
 function Categories() {
@@ -10,7 +11,7 @@ function Categories() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-  fetch(`http://localhost:8000/api/categories/${category}`)
+  fetch(`http://localhost:8000/api/categories/${category}`) 
     .then((res) => res.json())
     .then((data) => setProducts(data))
     .catch((err) => console.error("Error fetching category:", err));
@@ -25,13 +26,13 @@ function Categories() {
 
         <div className="category-products">
           {products.length > 0 ? (
-            products.map((p) => (
+            products.map((p) => ( // Loopar igenom produkterna och visar varje produkt
               <div key={p.id} className="category-item">
-                <a href={`/products/${p.name}`}>
+                <Link to={`/products/${p.name}`}>
                   <img src={p.image} alt={p.name} />
                   <h3>{p.name}</h3>
                   <p>{p.price} kr</p>
-                </a>
+                </Link>
               </div>
             ))
           ) : (

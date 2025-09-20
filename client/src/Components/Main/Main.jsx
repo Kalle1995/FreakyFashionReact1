@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Main.css";
 import Hero from "../Hero/Hero";
+import { Link } from "react-router-dom";
 
 function Main({ showProductsHits = false }) {
   const [mainProdukter, setMainProdukter] = useState([]);
@@ -23,19 +24,19 @@ function Main({ showProductsHits = false }) {
   title={headProdukter[0]?.name}
   text={headProdukter[0]?.description}
   link={`/products/${headProdukter[0]?.name}`}
-/>
+/>     {/* Hero-komponenten visar den första produkten i headProdukter med 0*/}
 
 
       <div className="lorem-inside-img">
         {headProdukter.map((produkt, index) => (
           <div key={index} className="lorem-inside-parent">
             <p className="first-lorem">{produkt.name}</p>
-            <a href={`/products/${produkt.name}`}>
+            <Link to={`/products/${produkt.name}`}>
               <img
                 src={produkt.image}
                 alt={produkt.name}
               />
-            </a>
+            </Link>
           </div>
         ))}
       </div>
@@ -48,19 +49,19 @@ function Main({ showProductsHits = false }) {
         {mainProdukter.map((produkt) => (
           <div key={produkt.id} className="product">
             {produkt.isNew && <p className="new-icon">Nyhet</p>}
-            <a href=""><img
+            <Link to=""><img
               className="product-icon"
               src="/favourite.png"
               alt="Favorit"
             /> 
-            </a>
-              <a href={`/products/${produkt.name}`}>
+            </Link>
+              <Link to={`/products/${produkt.name}`}>
               <img
                 className="product-pic"
                 src={produkt.image}
                 alt={produkt.name}
               />
-            </a>
+            </Link>
             <div className="prise">
               <p>{produkt.name}</p>
               <p>{produkt.price} SEK</p>

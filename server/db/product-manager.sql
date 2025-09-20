@@ -45,11 +45,11 @@ INSERT INTO categories (name, image) VALUES ('Skor', '');
 
 
 CREATE TABLE product_categories (
-    product_id INTEGER NOT NULL,
-    category_id INTEGER NOT NULL,
-    PRIMARY KEY (product_id, category_id),
-    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+    product_id INTEGER NOT NULL, -- referens till products.id
+    category_id INTEGER NOT NULL, -- referens till categories.id
+    PRIMARY KEY (product_id, category_id), -- sammansatt primärnyckel
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE, -- när en produkt tas bort, ta bort relaterade rader
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE -- när en kategori tas bort, ta bort relaterade rader
 );
 
 

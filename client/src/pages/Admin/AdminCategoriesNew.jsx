@@ -20,7 +20,7 @@ function AdminCategoriesNew() {
     if (image) formData.append("image", image);
 
     try {
-      const res = await fetch("http://localhost:8000/api/categories", {
+      const res = await fetch("http://localhost:8000/api/categories", { // await man väntar på att fetch ska bli klar innan den går vidare
         method: "POST",
         body: formData,
       });
