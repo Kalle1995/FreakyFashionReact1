@@ -18,8 +18,6 @@ function App() {
         <Route path="/products/:name" element={<ProductDetail />} />
         <Route path="/categories/:category" element={<Categories />} />
         <Route path="/search" element={<Search />} />
-
-        {/* Admin */}
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/products/new" element={<AdminProductsNew />} />
         <Route path="/admin/categories" element={<AdminCategories />} />

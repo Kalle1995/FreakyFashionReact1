@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import "./Main.css";
 import Hero from "../Hero/Hero";
 import { Link } from "react-router-dom";
+import "./Main.css";
 
-function Main({ showProductsHits = false }) {
+function Main({ showProductsHits = false }) { // showProductsHits: Prop för att visa antal produkter
   const [mainProdukter, setMainProdukter] = useState([]);
   const [headProdukter, setHeadProdukter] = useState([]);
+  const randomIndex = Math.floor(Math.random() * mainProdukter.length); 
+
 
   useEffect(() => {
     fetch("http://localhost:8000/api/products")
       .then((res) => res.json())
       .then((data) => {
-        setMainProdukter(data);
+        setMainProdukter(data); // alla produkter för mainProdukter
         setHeadProdukter(data.slice(0, 3)); // första 3 för head-produkter
       })
       .catch((err) => console.error("Fel vid hämtning av produkter:", err));
@@ -20,16 +22,16 @@ function Main({ showProductsHits = false }) {
   return (
     <main>
       <Hero
-  image={headProdukter[0]?.image}
-  title={headProdukter[0]?.name}
-  text={headProdukter[0]?.description}
-  link={`/products/${headProdukter[0]?.name}`}
-/>     {/* Hero-komponenten visar den första produkten i headProdukter med 0*/}
+        image={mainProdukter[randomIndex]?.image} 
+        title={mainProdukter[randomIndex]?.name}
+        text={mainProdukter[randomIndex]?.description}
+        link={`/products/${mainProdukter[randomIndex]?.name}`}
+      />     {/* Hero-komponenten visar en random produkt från mainProdukt*/}
 
 
       <div className="lorem-inside-img">
-        {headProdukter.map((produkt, index) => (
-          <div key={index} className="lorem-inside-parent">
+        {headProdukter.map((produkt, index) => ( // headProdukter för att visa 3 produkter högst upp
+          <div key={index} className="lorem-inside-parent"> {/* key={index}: Unikt nyckel för varje element i listan */}
             <p className="first-lorem">{produkt.name}</p>
             <Link to={`/products/${produkt.name}`}>
               <img
@@ -48,14 +50,14 @@ function Main({ showProductsHits = false }) {
       <div className="products">
         {mainProdukter.map((produkt) => (
           <div key={produkt.id} className="product">
-            {produkt.isNew && <p className="new-icon">Nyhet</p>}
-            <Link to=""><img
-              className="product-icon"
-              src="/favourite.png"
-              alt="Favorit"
-            /> 
+            <Link to="#" onClick={(e) => e.preventDefault()}>
+              <img
+                className="product-icon"
+                src="/favourite.png"
+                alt="Favorit"
+              /> 
             </Link>
-              <Link to={`/products/${produkt.name}`}>
+            <Link to={`/products/${produkt.name}`}>
               <img
                 className="product-pic"
                 src={produkt.image}
@@ -69,6 +71,7 @@ function Main({ showProductsHits = false }) {
           </div>
         ))}
       </div>
+
 
       <div className="All-info">
         <div className="info">

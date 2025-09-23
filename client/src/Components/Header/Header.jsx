@@ -1,5 +1,5 @@
 /*React: Behövs för att bygga komponenten.
--- useEffect: Hook som körs efter att komponenten renderats → används för att hämta data (API).
+-- useEffect: Hook som körs efter att komponenten renderats, används för att hämta data (API).
 --useState: Hook för att spara data i state (kategorier & söktext).
 --Link: Länk från react-router-dom som byter route utan att ladda om sidan.
 --useNavigate: Hook från react-router-dom för att programatiskt navigera användaren till en ny route. 
@@ -23,7 +23,7 @@ function Header() {
 
   const handleSearch = (e) => { // Hanterar sökformulärets submit-event.
     e.preventDefault(); // Förhindrar att sidan laddas om vid submit.
-    if (query.trim()) { 
+    if (query.trim()) {  // Kollar att sökfrågan inte är tom.
       navigate(`/search?q=${query}`); // Navigerar till sökresultatsidan med sökfrågan som query-param.
       setQuery(""); // Rensar sökfältet efter navigering.
     }
@@ -53,10 +53,10 @@ function Header() {
           </form>
 
           <div className="headIcons">
-            <Link to="">
+            <Link to="#" onClick={(e) => e.preventDefault()}>
               <img src="/favourite-(1).png" alt="Favoriter" />
             </Link>
-            <Link to="">
+            <Link to="#" onClick={(e) => e.preventDefault()}>
               <img src="/cart.png" alt="Varukorg" />
             </Link>
           </div>

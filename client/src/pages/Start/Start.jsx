@@ -5,8 +5,8 @@ import Footer from "../../Components/Footer/Footer";
 import { useEffect } from "react";
 
 function Start() {
-    useEffect(() => {
-    document.title = "Freaky Fashion";
+    useEffect(() => { 
+    document.title = "Freaky Fashion"; 
   }, []);
     return (
         <>  
