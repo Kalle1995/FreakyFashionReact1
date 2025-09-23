@@ -7,6 +7,10 @@ function AdminCategoriesNew() {
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+      document.title = "Administration";
+    }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

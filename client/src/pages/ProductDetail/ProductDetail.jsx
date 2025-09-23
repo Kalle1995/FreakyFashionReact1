@@ -16,7 +16,7 @@ function ProductDetail() {
       .then((res) => res.json()) // Omvandlar svaret till JSON
       .then((data) => { // Sparar produkten i state
         setProduct(data); // Spara produktdata i state
-        document.title = data.name; // Uppdatera sidans titel
+        document.title = `${data.name} | Freaky Fashion`;
       })
       .catch((err) => console.error("Error fetching product:", err)); // Felhantering. om det något fel.
 

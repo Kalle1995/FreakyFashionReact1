@@ -16,6 +16,10 @@ function AdminProductsNew() {
   const navigate = useNavigate();
 
   useEffect(() => {
+      document.title = "Administration";
+    }, []);
+
+  useEffect(() => {
     fetch("http://localhost:8000/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data))

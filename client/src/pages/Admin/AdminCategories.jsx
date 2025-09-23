@@ -6,6 +6,10 @@ function AdminCategories() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    document.title = "Administration";
+  }, []);
+
+  useEffect(() => {
     fetch("http://localhost:8000/api/categories") // hämta alla kategorier från API
       .then((res) => res.json())
       .then((data) => setCategories(data))

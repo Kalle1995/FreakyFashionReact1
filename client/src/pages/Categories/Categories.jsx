@@ -15,6 +15,7 @@ function Categories() {
     .then((res) => res.json())
     .then((data) => setProducts(data))
     .catch((err) => console.error("Error fetching category:", err));
+    document.title = `${category} | Freaky Fashion`;
 }, [category]);
 
   return (

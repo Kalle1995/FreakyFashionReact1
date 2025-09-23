@@ -12,6 +12,10 @@ function Search() {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("q")?.trim() || ""; // Hämtar sökfrågan från URL:en
 
+   useEffect(() => {
+    document.title = "Sökresultat | Freaky Fashion";
+  }, []);
+
   useEffect(() => {
     if (!query) {
       setProducts([]);

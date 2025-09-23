@@ -6,6 +6,10 @@ function AdminProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+      document.title = "Administration";
+    }, []);
+
+  useEffect(() => {
     fetch("http://localhost:8000/api/products") // hämta alla produkter från ditt API
       .then((res) => res.json())
       .then((data) => setProducts(data))
