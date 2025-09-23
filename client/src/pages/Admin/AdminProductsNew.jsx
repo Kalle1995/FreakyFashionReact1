@@ -26,13 +26,13 @@ function AdminProductsNew() {
       .catch((err) => console.error(err));
   }, []);
 
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen); // Öppna/stäng dropdown-menyn
 
-  const handleCheckboxChange = (id) => {
-    if (selectedCategories.includes(id)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== id));
+  const handleCheckboxChange = (id) => { // Hantera när en kategori-checkbox ändras
+    if (selectedCategories.includes(id)) { // Om kategorin redan är vald, ta bort den
+      setSelectedCategories(selectedCategories.filter((c) => c !== id)); // Filtrerar bort kategorin med det givna id:t
     } else {
-      setSelectedCategories([...selectedCategories, id]);
+      setSelectedCategories([...selectedCategories, id]); // Annars, lägg till den i listan över valda kategorier
     }
   };
 
@@ -44,7 +44,7 @@ function AdminProductsNew() {
     }
 
     const skuPattern = /^[A-Za-z]{3}\d{3}$/; // Tre bokstäver följt av tre siffror
-  if (!skuPattern.test(sku)) {
+  if (!skuPattern.test(sku)) { // Validera SKU med regex
     alert("SKU måste vara tre bokstäver sedan tre siffror (ex: AAA111).");
     return;
   }
@@ -58,7 +58,7 @@ function AdminProductsNew() {
     formData.append("price", price);
     formData.append("categories", JSON.stringify(selectedCategories));
 
-    if (image) formData.append("image", image);
+    if (image) formData.append("image", image); // om img är null kan det bli fel på servern
 
     try {
       const res = await fetch("http://localhost:8000/api/products", {
@@ -99,7 +99,7 @@ function AdminProductsNew() {
               type="text"
               value={name}
               maxLength="25"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)} 
               required
               className="admin-input admin-input-name"
             />
@@ -151,10 +151,10 @@ function AdminProductsNew() {
             />
 
             <label className="admin-label">Kategorier</label>
-            <div className="dropdown" ref={dropdownRef}>
+            <div className="dropdown" ref={dropdownRef}> {/* Referens för att kunna hantera klick utanför dropdown */}
               <div className="dropdown-header" onClick={toggleDropdown}>
-                {selectedCategories.length > 0
-                  ? `${selectedCategories.length} vald(a)`
+                {selectedCategories.length > 0 // Visa antal valda kategorier eller "Välj kategorier"
+                  ? `${selectedCategories.length} vald(a)` 
                   : "Välj kategorier"}
               </div>
               {dropdownOpen && (

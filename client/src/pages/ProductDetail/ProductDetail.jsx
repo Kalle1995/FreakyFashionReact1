@@ -14,16 +14,16 @@ function ProductDetail() {
     // Hämta huvudprodukten
     fetch(`http://localhost:8000/api/products/${name}`)
       .then((res) => res.json()) // Omvandlar svaret till JSON
-      .then((data) => { // Sparar produkten i state
+      .then((data) => { // Hantera den hämtade produktdatan
         setProduct(data); // Spara produktdata i state
         document.title = `${data.name} | Freaky Fashion`;
       })
       .catch((err) => console.error("Error fetching product:", err)); // Felhantering. om det något fel.
 
-    // Hämta 3 liknande produkter (kan ändras)
+    // Hämta liknande produkter
     fetch(`http://localhost:8000/api/products/${name}/similar`)
-      .then((res) => res.json())
-      .then((data) => setSimilar(data))
+      .then((res) => res.json()) // Omvandlar svaret till JSON
+      .then((data) => setSimilar(data)) // Spara liknande produkter i state
       .catch((err) => console.error("Error fetching similar products:", err));
   }, [name]);
 
@@ -54,7 +54,7 @@ function ProductDetail() {
           <h2 className="similar">Liknande produkter</h2>
           <div className="img-slide-section">
             {similar.map((p) => (
-              <div key={p.id} className="slide-item">
+              <div key={p.id} className="slide-item"> 
                 <Link to={`/products/${p.name}`}>
                   <img className="slide-image" src={p.image} alt={p.name} />
                   <p>{p.name}</p>

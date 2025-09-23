@@ -9,7 +9,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json()); 
-app.use('/images/products', express.static(path.join(__dirname, '../../client/public/images/products')));  // Gör bilder i denna mapp tillgängliga via URL
+app.use('/images/products', express.static(path.join(__dirname, '../../client/public/images/products')));  // bilden ska vara tillgänglig via denna route
 app.use('/images/categories', express.static(path.join(__dirname, '../../client/public/images/categories')));  
 
 
@@ -19,7 +19,7 @@ const db = new Database("./db/product-manager.db", { verbose: console.log });
 
 app.get("/api/categories", (req, res) => {
   try {
-    const categories = db.prepare("SELECT id, name FROM categories").all();
+    const categories = db.prepare("SELECT id, name FROM categories").all(); // Hämta alla kategorier
     res.json(categories);
   } catch (err) {
     console.error(err);
@@ -68,7 +68,7 @@ app.get("/api/products/search", (req, res) => { // Sök produkter baserat på s�
     if (!searchTerm) return res.json([]); // Om sökterm är tom, returnera tom array
 
     const products = db
-      .prepare("SELECT * FROM products WHERE LOWER(name) LIKE ?")
+      .prepare("SELECT * FROM products WHERE LOWER(name) LIKE ?") 
       .all(`%${searchTerm}%`); 
 
     res.json(products || []); // Returnera produkter eller tom array
@@ -111,11 +111,11 @@ app.get('/api/products/:name/similar', (req, res) => {
 });
 
 
-const storage = multer.diskStorage({ // Konfiguration för var och hur filer ska sparas
+const storage = multer.diskStorage({ // diskStorage används för att lagra filer på disk
   destination: path.join(__dirname, "../../client/public/images/products"), //__dirname är den nuvarande katalogen.
   filename: (req, file, cb) => { // cb är en callback-funktion som anropas när filnamnet är skapat
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9); // Raden skapar ett unikt suffix baserat på tid och ett slumpmässigt tal för att säkerställa att uppladdade filer får unika namn och inte krockar.
-    const ext = path.extname(file.originalname);
+    const ext = path.extname(file.originalname); // vktigt att behålla rätt filtyp
     cb(null, file.fieldname + "-" + uniqueSuffix + ext); // Exempel: image-1632345678901-123456789.jpg. ext är filändelsen som behålls från den ursprungliga filen.
   },
 });

@@ -16,20 +16,20 @@ function Search() {
     document.title = "Sökresultat | Freaky Fashion";
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { // Effekt som körs när 'query' ändras
     if (!query) {
-      setProducts([]);
+      setProducts([]); // Rensa produkter om sökfrågan är tom
       setError(null); // Rensa felmeddelande om sökfrågan är tom
-      setLoading(false);
+      setLoading(false); // Sätt loading till false om sökfrågan är tom
       return;
     }
 
-    const fetchProducts = async () => {
-      setLoading(true);
+    const fetchProducts = async () => { // Asynkron funktion för att hämta produkter baserat på sökfrågan
+      setLoading(true); // visa att den laddar
       setError(null); // Rensa tidigare felmeddelande
       try {
         const res = await fetch(
-          `http://localhost:8000/api/products/search?q=${encodeURIComponent(
+          `http://localhost:8000/api/products/search?q=${encodeURIComponent( // encodeURIComponent för att hantera specialtecken i sök
             query
           )}`
         );
@@ -38,18 +38,18 @@ function Search() {
           throw new Error(`Server error: ${res.status}`);
         }
 
-        const data = await res.json();
-        setProducts(Array.isArray(data) ? data : []);
+        const data = await res.json(); // konverterar svaret från API:t (JSON) till ett JavaScript-objekt eller array.
+        setProducts(Array.isArray(data) ? data : []); // Sätt produkter om data är en array, annars tom array
       } catch (err) {
         console.error("Error fetching search results:", err);
         setError("Kunde inte hämta sökresultat.");
         setProducts([]);
-      } finally {
+      } finally { 
       setLoading(false); // Sätt loading till false när fetch är klar, oavsett resultat
         }
     };
 
-    fetchProducts();
+    fetchProducts(); // Anropa den asynkrona funktionen för att hämta produkter
   }, [query]); // Körs när komponenten mountas eller när 'query' ändras
 
   return (

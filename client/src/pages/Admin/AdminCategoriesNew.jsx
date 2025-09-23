@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Admin.css";
 
 function AdminCategoriesNew() {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState(null);
-  const navigate = useNavigate();
+  const [name, setName] = useState(""); // State för kategoriens namn 
+  const [image, setImage] = useState(null); // State för kategoriens bild (om någon)
+  const navigate = useNavigate(); // Hook för att programatiskt navigera till en annan sida
 
   useEffect(() => {
       document.title = "Administration";
     }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => { // Asynkron funktion för att hantera formulärinlämning
+    e.preventDefault(); // Förhindra standardformulärbeteende (sida laddas inte om)
 
     if (!name || name.length > 25) {
       alert("Namn är obligatoriskt och får max vara 25 tecken.");
